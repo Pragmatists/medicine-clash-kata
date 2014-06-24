@@ -1,67 +1,48 @@
 package pl.pragmatists.tdd.medicineclash;
 
 import com.google.common.collect.ContiguousSet;
-import com.google.common.collect.DiscreteDomain;
 import com.google.common.collect.Range;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PrescribedIntervals {
-    List<Range> intervals;
+    List<Range<LocalDate>> intervals;
 
-    public PrescribedIntervals(List<Range> intervals) {
+    public PrescribedIntervals(List<Range<LocalDate>> intervals) {
         this.intervals = intervals;
     }
 
     public Collection<LocalDate> findClashes(PrescribedIntervals secondPrescribedIntervals) {
-        return intervals.stream()
-                .map(r -> clashWithAllFrom(r, secondPrescribedIntervals.intervals))
-                .flatMap(s -> s.stream())
-                .collect(Collectors.toList());
+        return flatList(intervals.stream()
+                .map(r -> clashWithAllFrom(r, secondPrescribedIntervals.intervals)));
+
     }
 
-    private List<LocalDate> clashWithAllFrom(Range range, List<Range> others) {
-        return others.stream()
-                .map(r -> clashDatesBetween(range, r))
-                .flatMap(s -> s.stream())
-                .collect(Collectors.toList());
+    private Collection<LocalDate> clashWithAllFrom(Range<LocalDate> range, List<Range<LocalDate>> others) {
+        return flatList(others.stream()
+                .map(r -> clashDatesBetween(range, r)));
     }
 
-    private Set<LocalDate> clashDatesBetween(Range second, Range first) {
+    private Collection<LocalDate> flatList(Stream<Collection<LocalDate>> stream) {
+        return stream.flatMap(Collection::stream).collect(Collectors.toList());
+    }
+
+    private Set<LocalDate> clashDatesBetween(Range<LocalDate> second, Range<LocalDate> first) {
         if (first.isConnected(second)) {
             return allDatesWithin(first.intersection(second));
         }
         return Collections.emptySet();
     }
 
-    private Set<LocalDate> allDatesWithin(Range range) {
+    @SuppressWarnings("unchecked")
+    private Set<LocalDate> allDatesWithin(Range<LocalDate> range) {
         return ContiguousSet.create(range, new DaysDiscreteDomain());
     }
 
-    private class DaysDiscreteDomain extends DiscreteDomain {
-        @Override
-        public Comparable next(Comparable comparable) {
-            LocalDate date = (LocalDate) comparable;
-            return date.plusDays(1);
-        }
-
-        @Override
-        public Comparable previous(Comparable comparable) {
-            LocalDate date = (LocalDate) comparable;
-            return date.minusDays(1);
-        }
-
-        @Override
-        public long distance(Comparable comparable, Comparable comparable2) {
-            LocalDate date1 = (LocalDate) comparable;
-            LocalDate date2 = (LocalDate) comparable2;
-            return ChronoUnit.DAYS.between(date1, date2);
-        }
-    }
 }
