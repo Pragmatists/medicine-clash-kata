@@ -1,4 +1,4 @@
-package pl.pragmatists.tdd.medicineclash.version1;
+package pl.pragmatists.tdd.medicineclash;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

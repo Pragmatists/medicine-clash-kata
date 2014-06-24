@@ -1,4 +1,4 @@
-package pl.pragmatists.tdd.medicineclash.version2;
+package pl.pragmatists.tdd.medicineclash;
 
 import com.google.common.collect.ContiguousSet;
 import com.google.common.collect.DiscreteDomain;
