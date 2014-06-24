@@ -121,12 +121,8 @@ public class ClashVersion2Test {
     @Test
     public void clashing_medicine_not_in_query() throws Exception {
         Patient patient = createPatient();
-        Medicine fluoxetine = new Medicine("Fluoxetine");
-        fluoxetine.addPrescription(new Prescription(LocalDate.of(2010, 3, 1), 31));
-        patient.addMedicine(fluoxetine);
-        Medicine codeine = new Medicine("Codeine");
-        codeine.addPrescription(new Prescription(LocalDate.of(2010, 3, 15), 1));
-        patient.addMedicine(codeine);
+        given(patient).hasPrescriptionFrom(2010, 3, 1).forDays(31).forMedicine("Fluoxetine");
+        given(patient).hasPrescriptionFrom(2010, 3, 15).forDays(1).forMedicine("Codeine");
 
         Collection<LocalDate> clashDates = patient.clash(asList("Codeine"));
 
@@ -135,13 +131,9 @@ public class ClashVersion2Test {
 
     @Test
     public void clash_more_than_queried_days_before() throws Exception {
-        Patient patient = createPatient();
-        Medicine fluoxetine = new Medicine("Fluoxetine");
-        fluoxetine.addPrescription(new Prescription(LocalDate.of(2010, 3, 1), 31));
-        patient.addMedicine(fluoxetine);
-        Medicine codeine = new Medicine("Codeine");
-        codeine.addPrescription(new Prescription(LocalDate.of(2010, 3, 15), 1));
-        patient.addMedicine(codeine);
+        Patient patient = new Patient(createTimeProvider(LocalDate.of(2010, 3, 17)));
+        given(patient).hasPrescriptionFrom(2010, 3, 1).forDays(31).forMedicine("Fluoxetine");
+        given(patient).hasPrescriptionFrom(2010, 3, 15).forDays(1).forMedicine("Fluoxetine");
 
         Collection<LocalDate> clashDates = patient.clash(asList("Codeine", "Fluoxetine"), 1);
 
