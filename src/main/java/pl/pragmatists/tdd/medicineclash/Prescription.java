@@ -1,8 +1,9 @@
-package pl.pragmatists.tdd.medicineclash.version2;
+package pl.pragmatists.tdd.medicineclash;
 
 import com.google.common.collect.Range;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Prescription {
     

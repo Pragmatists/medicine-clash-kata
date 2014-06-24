@@ -1,12 +1,8 @@
-package pl.pragmatists.tdd.medicineclash.version2;
+package pl.pragmatists.tdd.medicineclash;
 
 import com.google.common.collect.Lists;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import pl.pragmatists.tdd.medicineclash.version1.Medicine;
-import pl.pragmatists.tdd.medicineclash.version1.Patient;
-import pl.pragmatists.tdd.medicineclash.version1.Prescription;
-import pl.pragmatists.tdd.medicineclash.version1.TimeProvider;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -15,7 +11,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class ClashVersion2Test {
+public class ClashTest {
 
     @Test
     public void empty_input() throws Exception {
