@@ -129,11 +129,22 @@ public class ClashTest {
     public void clash_more_than_queried_days_before() throws Exception {
         Patient patient = new Patient(createTimeProvider(LocalDate.of(2010, 3, 17)));
         given(patient).hasPrescriptionFrom(2010, 3, 1).forDays(31).forMedicine("Fluoxetine");
-        given(patient).hasPrescriptionFrom(2010, 3, 15).forDays(1).forMedicine("Fluoxetine");
+        given(patient).hasPrescriptionFrom(2010, 3, 15).forDays(1).forMedicine("Codeine");
 
         Collection<LocalDate> clashDates = patient.clash(asList("Codeine", "Fluoxetine"), 1);
 
         Assertions.assertThat(clashDates).isEmpty();
+    }
+
+    @Test
+    public void clash_exactly_at_days_before() throws Exception {
+        Patient patient = new Patient(createTimeProvider(LocalDate.of(2010, 3, 20)));
+        given(patient).hasPrescriptionFrom(2010, 3, 5).forDays(7).forMedicine("Fluoxetine");
+        given(patient).hasPrescriptionFrom(2010, 3, 9).forDays(3).forMedicine("Codeine");
+
+        Collection<LocalDate> clashDates = patient.clash(asList("Codeine", "Fluoxetine"), 10);
+
+        Assertions.assertThat(clashDates).containsExactly(LocalDate.of(2010,3,10), LocalDate.of(2010,3,11));
     }
 
     private TimeProvider createTimeProvider(LocalDate currentDate) {

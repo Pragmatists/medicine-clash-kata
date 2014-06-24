@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Medicine {
 
-    private Collection<Prescription> prescriptions = new ArrayList<>();
+    Collection<Prescription> prescriptions = new ArrayList<>();
     
     public final String name;
 
@@ -19,17 +19,4 @@ public class Medicine {
         this.prescriptions.add(prescription);
     }
 
-    public Collection<LocalDate> clashesWith(Medicine second) {
-        PrescribedIntervals prescribedIntervals = asIntervals();
-        PrescribedIntervals secondPrescribedIntervals = second.asIntervals();
-        return prescribedIntervals.findClashes(secondPrescribedIntervals);
-    }
-
-    private PrescribedIntervals asIntervals() {
-        return new PrescribedIntervals(prescriptions.stream().map(Prescription::asInterval).collect(Collectors.toList()));
-    }
-
-    public Collection<LocalDate> clashesWith(Collection<Medicine> medicines) {
-        return medicines.stream().map(m->m.clashesWith(this)).flatMap(Collection::stream).collect(Collectors.toList());
-    }
 }

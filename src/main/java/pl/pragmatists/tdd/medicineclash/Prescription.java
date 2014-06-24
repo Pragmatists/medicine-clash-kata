@@ -15,7 +15,4 @@ public class Prescription {
         this.daysSupply = daysSupply;
     }
 
-    public Range asInterval() {
-        return Range.closedOpen(dispenseDate, dispenseDate.plusDays(daysSupply));
-    }
 }
