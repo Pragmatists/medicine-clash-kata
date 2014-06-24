@@ -1,6 +1,4 @@
-package pl.pragmatists.tdd.medicineclash.version2;
-
-import com.google.common.collect.Range;
+package pl.pragmatists.tdd.medicineclash;
 
 import java.time.LocalDate;
 
@@ -14,7 +12,4 @@ public class Prescription {
         this.daysSupply = daysSupply;
     }
 
-    public Range asInterval() {
-        return Range.closedOpen(dispenseDate, dispenseDate.plusDays(daysSupply));
-    }
 }
