@@ -1,11 +1,12 @@
 package pl.pragmatists.tdd.medicineclash;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 public class ClashTest {
 
     @Test
-    public void start_here() throws Exception {
+    public void start_here() {
 
 
     }

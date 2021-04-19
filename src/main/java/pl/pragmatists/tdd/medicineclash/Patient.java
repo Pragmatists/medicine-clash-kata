@@ -4,11 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class Patient {
 
-    private Collection<Medicine> medicines = new ArrayList<Medicine>();
+    private Collection<Medicine> medicines = new ArrayList<>();
 
     public void addMedicine(Medicine medicine) {
         this.medicines.add(medicine);
@@ -19,7 +17,7 @@ public class Patient {
     }
 
     public Collection<LocalDate> clash(final Collection<String> medicineNames, int daysBack) {
-        return newArrayList();
+        return null;
     }
 
 }
