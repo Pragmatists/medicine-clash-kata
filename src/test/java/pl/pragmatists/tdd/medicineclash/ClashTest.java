@@ -1,7 +1,7 @@
 package pl.pragmatists.tdd.medicineclash;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Arrays;
