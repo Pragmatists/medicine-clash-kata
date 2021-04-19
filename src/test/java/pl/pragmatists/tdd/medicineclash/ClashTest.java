@@ -2,7 +2,7 @@ package pl.pragmatists.tdd.medicineclash;
 
 import com.google.common.collect.Lists;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Collection;
