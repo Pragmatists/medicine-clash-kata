@@ -33,3 +33,6 @@ So each Patient has a list of Medicines. Medicines have a unique name. Each Medi
 - patients start taking the medicine on the dispense date.
 - the "days supply" tells you how many days they continue to take the medicine after the dispense date.
 - if they have two overlapping prescriptions for the same medicine, they stop taking the earlier one. Imagine they have mislaid the medicine they got from the first prescription when they start on the second prescription.
+
+![image](https://user-images.githubusercontent.com/758497/115776509-7c502500-a3b4-11eb-9020-59fe2718d040.png)
+
