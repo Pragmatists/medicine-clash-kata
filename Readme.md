@@ -14,17 +14,7 @@ For this Kata, you have a recently discovered medicine clash, and you want to lo
 
 You can assume the data is in a database, which is accessed in the code via an object oriented domain model. The domain model is large and complex, but for this problem you can ignore all but the following entities and attributes:
 
-    Patient
-    + medicines
-
-    Medicine
-    + name
-    + prescriptions
-
-    Prescription
-    + dispense date
-    + days supply
-
+![image](https://user-images.githubusercontent.com/758497/115776659-ab669680-a3b4-11eb-9e9c-0ed2e428fa58.png)
 
 So each Patient has a list of Medicines. Medicines have a unique name. Each Medicine has a list of Prescriptions. Each Prescription has a dispense date and a number of days supply.
 
